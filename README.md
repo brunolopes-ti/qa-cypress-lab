@@ -1,8 +1,8 @@
 # QA Automation Lab
 
-Projeto de portfólio criado para praticar e documentar testes automatizados web com Cypress.
+Projeto de portfólio criado para praticar, organizar e documentar testes automatizados end-to-end com Cypress.
 
-O objetivo deste projeto é demonstrar a criação de testes end-to-end, organização de evidências e evolução prática em automação de testes para QA.
+O objetivo deste projeto é demonstrar uma suíte de automação web cobrindo fluxos reais de uma aplicação de e-commerce de treino, com validações, evidências e execução completa via terminal.
 
 ## Tecnologias utilizadas
 
@@ -16,32 +16,53 @@ O objetivo deste projeto é demonstrar a criação de testes end-to-end, organiz
 
 ## Sistema utilizado para teste
 
-Site: [SauceDemo](https://www.saucedemo.com/)
+Aplicação: [SauceDemo](https://www.saucedemo.com/)
 
-O SauceDemo é uma aplicação web de treino muito utilizada para estudos de QA, pois permite validar fluxos comuns como login, carrinho e checkout.
+O SauceDemo é uma aplicação web utilizada para estudos de QA, permitindo praticar fluxos como login, carrinho e checkout.
+
+## Escopo da automação
+
+A suíte automatizada cobre os seguintes fluxos:
+
+- Login com usuário válido;
+- Login com usuário inválido;
+- Login com usuário bloqueado;
+- Adição de produto ao carrinho;
+- Validação de produto no carrinho;
+- Checkout completo;
+- Execução da suíte completa em modo headless.
 
 ## Estrutura do projeto
 
 ```text
 qa-automation-lab
 ├── cypress
-│   ├── cypress
-│   │   ├── e2e
-│   │   │   └── saucedemo-login.cy.js
-│   │   ├── fixtures
-│   │   ├── screenshots
-│   │   └── support
+│   ├── e2e
+│   │   ├── saucedemo-login.cy.js
+│   │   ├── saucedemo-cart.cy.js
+│   │   └── saucedemo-checkout.cy.js
+│   ├── fixtures
+│   ├── support
+│   ├── screenshots
 │   ├── cypress.config.js
 │   ├── package.json
 │   └── package-lock.json
 ├── docs
-│   ├── evidencias
-│   │   └── cypress
-│   │       ├── login-valido-teste-passando.png
-│   │       └── login-valido-saucedemo.png
-│   ├── comparison-cypress-playwright.md
-│   ├── evidence.md
-│   └── test-scenarios.md
+│   └── evidencias
+│       └── cypress
+│           ├── login-valido-teste-passando.png
+│           ├── login-valido-saucedemo.png
+│           ├── login-invalido-teste-passando.png
+│           ├── login-invalido-saucedemo.png
+│           ├── login-usuario-bloqueado-teste-passando.png
+│           ├── login-usuario-bloqueado-saucedemo.png
+│           ├── produto-adicionado-carrinho-teste-passando.png
+│           ├── produto-adicionado-carrinho-saucedemo.png
+│           ├── validacao-carrinho-teste-passando.png
+│           ├── validacao-carrinho-saucedemo.png
+│           ├── checkout-completo-teste-passando.png
+│           ├── checkout-completo-saucedemo.png
+│           └── suite-completa-cypress-passando.png
 ├── playwright
 ├── .gitignore
 └── README.md
@@ -55,17 +76,79 @@ Acesse a pasta do Cypress:
 cd cypress
 ```
 
-Abra o Cypress:
+Instale as dependências, caso necessário:
+
+```bash
+npm install
+```
+
+Para abrir o Cypress em modo interativo:
 
 ```bash
 npx cypress open
 ```
 
-Depois, no Cypress:
+Para executar toda a suíte em modo headless:
 
-1. Clique em `E2E Testing`;
-2. Escolha o navegador;
-3. Execute o arquivo `saucedemo-login.cy.js`.
+```bash
+npx cypress run
+```
+
+Para executar um arquivo específico:
+
+```bash
+npx cypress run --spec "e2e/saucedemo-login.cy.js"
+```
+
+```bash
+npx cypress run --spec "e2e/saucedemo-cart.cy.js"
+```
+
+```bash
+npx cypress run --spec "e2e/saucedemo-checkout.cy.js"
+```
+
+## Arquivos de teste
+
+### Login
+
+Arquivo:
+
+```text
+cypress/e2e/saucedemo-login.cy.js
+```
+
+Cenários cobertos:
+
+- Login válido;
+- Login inválido;
+- Login com usuário bloqueado.
+
+### Carrinho
+
+Arquivo:
+
+```text
+cypress/e2e/saucedemo-cart.cy.js
+```
+
+Cenários cobertos:
+
+- Adicionar produto ao carrinho;
+- Validar contador do carrinho;
+- Validar produto, preço e botão de checkout na página do carrinho.
+
+### Checkout
+
+Arquivo:
+
+```text
+cypress/e2e/saucedemo-checkout.cy.js
+```
+
+Cenário coberto:
+
+- Realizar checkout completo com sucesso.
 
 ## Cenários automatizados
 
@@ -80,63 +163,241 @@ Depois, no Cypress:
 | Usuário | `standard_user` |
 | Senha | `secret_sauce` |
 
-**Fluxo testado:**
+**Validações realizadas:**
 
-- Acessar o site SauceDemo;
-- Preencher o usuário válido;
-- Preencher a senha válida;
-- Clicar no botão de login;
-- Validar o redirecionamento para `/inventory.html`;
-- Validar a exibição do título `Products`;
-- Validar a exibição da lista de produtos.
+- Redirecionamento para `/inventory.html`;
+- Exibição do título `Products`;
+- Exibição da lista de produtos.
 
-**Arquivo do teste:**
+**Evidências:**
 
 ```text
-cypress/cypress/e2e/saucedemo-login.cy.js
+docs/evidencias/cypress/login-valido-teste-passando.png
+docs/evidencias/cypress/login-valido-saucedemo.png
 ```
 
-## Código do primeiro teste
+### CT-02 - Login inválido
 
-```javascript
-describe('SauceDemo - Login', () => {
-  it('Deve realizar login com usuário válido', () => {
-    cy.visit('https://www.saucedemo.com/');
+**Objetivo:** validar que o sistema exibe mensagem de erro ao tentar login com credenciais inválidas.
 
-    cy.get('[data-test="username"]').type('standard_user');
-    cy.get('[data-test="password"]').type('secret_sauce');
-    cy.get('[data-test="login-button"]').click();
+**Dados utilizados:**
 
-    cy.url().should('include', '/inventory.html');
-    cy.get('.title').should('contain', 'Products');
-    cy.get('.inventory_list').should('be.visible');
+| Campo | Valor |
+|---|---|
+| Usuário | `usuario_invalido` |
+| Senha | `senha_invalida` |
 
-    cy.screenshot('login-valido-saucedemo');
-  });
-});
+**Validações realizadas:**
+
+- Exibição da mensagem de erro;
+- Permanência do usuário na tela de login.
+
+**Evidências:**
+
+```text
+docs/evidencias/cypress/login-invalido-teste-passando.png
+docs/evidencias/cypress/login-invalido-saucedemo.png
 ```
 
-## Evidências
+### CT-03 - Login com usuário bloqueado
 
-### Teste executado com sucesso no Cypress
+**Objetivo:** validar que o sistema bloqueia o acesso de um usuário impedido de realizar login.
 
-![Teste de login válido passando no Cypress](docs/evidencias/cypress/login-valido-teste-passando.png)
+**Dados utilizados:**
 
-### Página de produtos após login válido
+| Campo | Valor |
+|---|---|
+| Usuário | `locked_out_user` |
+| Senha | `secret_sauce` |
+
+**Validações realizadas:**
+
+- Exibição da mensagem de usuário bloqueado;
+- Permanência do usuário na tela de login.
+
+**Evidências:**
+
+```text
+docs/evidencias/cypress/login-usuario-bloqueado-teste-passando.png
+docs/evidencias/cypress/login-usuario-bloqueado-saucedemo.png
+```
+
+### CT-04 - Adicionar produto ao carrinho
+
+**Objetivo:** validar que um produto pode ser adicionado ao carrinho com sucesso.
+
+**Produto utilizado:**
+
+| Produto | Valor |
+|---|---|
+| Sauce Labs Backpack | `$29.99` |
+
+**Validações realizadas:**
+
+- Clique no botão `Add to cart`;
+- Exibição do contador do carrinho com valor `1`;
+- Alteração do botão para `Remove`.
+
+**Evidências:**
+
+```text
+docs/evidencias/cypress/produto-adicionado-carrinho-teste-passando.png
+docs/evidencias/cypress/produto-adicionado-carrinho-saucedemo.png
+```
+
+### CT-05 - Validar produto na página do carrinho
+
+**Objetivo:** validar que o produto adicionado aparece corretamente na página do carrinho.
+
+**Validações realizadas:**
+
+- Redirecionamento para `/cart.html`;
+- Exibição do título `Your Cart`;
+- Exibição do produto `Sauce Labs Backpack`;
+- Exibição do preço `$29.99`;
+- Exibição do botão `Checkout`.
+
+**Evidências:**
+
+```text
+docs/evidencias/cypress/validacao-carrinho-teste-passando.png
+docs/evidencias/cypress/validacao-carrinho-saucedemo.png
+```
+
+### CT-06 - Checkout completo
+
+**Objetivo:** validar o fluxo completo de compra, desde o carrinho até a finalização do pedido.
+
+**Dados utilizados:**
+
+| Campo | Valor |
+|---|---|
+| Nome | `Bruno` |
+| Sobrenome | `Ramos` |
+| CEP | `72000-000` |
+
+**Validações realizadas:**
+
+- Acesso à etapa de informações do checkout;
+- Preenchimento dos dados do comprador;
+- Acesso à tela de resumo da compra;
+- Validação do produto no resumo;
+- Validação do preço;
+- Finalização da compra;
+- Exibição da mensagem `Thank you for your order!`.
+
+**Evidências:**
+
+```text
+docs/evidencias/cypress/checkout-completo-teste-passando.png
+docs/evidencias/cypress/checkout-completo-saucedemo.png
+```
+
+## Resultado da suíte completa
+
+A suíte foi executada via terminal com o comando:
+
+```bash
+npx cypress run
+```
+
+Resultado obtido:
+
+```text
+saucedemo-cart.cy.js        3 testes passando
+saucedemo-checkout.cy.js    1 teste passando
+saucedemo-login.cy.js       3 testes passando
+
+Total: 7 testes passando
+```
+
+**Evidência da execução completa:**
+
+```text
+docs/evidencias/cypress/suite-completa-cypress-passando.png
+```
+
+![Suíte completa Cypress passando](docs/evidencias/cypress/suite-completa-cypress-passando.png)
+
+## Evidências visuais
+
+### Login válido
+
+![Login válido passando](docs/evidencias/cypress/login-valido-teste-passando.png)
 
 ![Página de produtos após login válido](docs/evidencias/cypress/login-valido-saucedemo.png)
 
-## Próximos cenários planejados
+### Login inválido
 
-- Login inválido;
-- Login com usuário bloqueado;
-- Adição de produto ao carrinho;
-- Validação do carrinho;
-- Fluxo de checkout;
-- Comparação prática entre Cypress e Playwright.
+![Login inválido passando](docs/evidencias/cypress/login-invalido-teste-passando.png)
+
+![Mensagem de erro no login inválido](docs/evidencias/cypress/login-invalido-saucedemo.png)
+
+### Usuário bloqueado
+
+![Usuário bloqueado passando](docs/evidencias/cypress/login-usuario-bloqueado-teste-passando.png)
+
+![Mensagem de usuário bloqueado](docs/evidencias/cypress/login-usuario-bloqueado-saucedemo.png)
+
+### Carrinho
+
+![Produto adicionado ao carrinho passando](docs/evidencias/cypress/produto-adicionado-carrinho-teste-passando.png)
+
+![Produto adicionado ao carrinho](docs/evidencias/cypress/produto-adicionado-carrinho-saucedemo.png)
+
+![Validação do carrinho passando](docs/evidencias/cypress/validacao-carrinho-teste-passando.png)
+
+![Produto validado na página do carrinho](docs/evidencias/cypress/validacao-carrinho-saucedemo.png)
+
+### Checkout
+
+![Checkout completo passando](docs/evidencias/cypress/checkout-completo-teste-passando.png)
+
+![Checkout finalizado com sucesso](docs/evidencias/cypress/checkout-completo-saucedemo.png)
+
+## Configuração do Cypress
+
+Arquivo:
+
+```text
+cypress/cypress.config.js
+```
+
+Configuração utilizada:
+
+```javascript
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  e2e: {
+    specPattern: 'e2e/**/*.cy.js',
+    supportFile: false,
+    screenshotsFolder: 'screenshots',
+    videosFolder: 'videos'
+  }
+});
+```
+
+## Observações
+
+As evidências automáticas geradas pelo Cypress foram copiadas para a pasta:
+
+```text
+docs/evidencias/cypress
+```
+
+A pasta automática de screenshots do Cypress foi adicionada ao `.gitignore`, evitando versionar arquivos temporários gerados durante a execução local.
 
 ## Status do projeto
 
-Em andamento.
+Concluído nesta etapa.
 
-Primeiro teste automatizado com Cypress criado e executado com sucesso.
+Suíte automatizada Cypress criada, organizada, executada e documentada com sucesso.
+
+## Próximas melhorias possíveis
+
+- Criar comandos customizados para login;
+- Usar fixtures para massa de dados;
+- Adicionar testes negativos no checkout;
+- Executar testes em pipeline de CI/CD;
+- Comparar a mesma suíte com Playwright.
