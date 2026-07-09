@@ -400,4 +400,4 @@ Suíte automatizada Cypress criada, organizada, executada e documentada com suce
 - Usar fixtures para massa de dados;
 - Adicionar testes negativos no checkout;
 - Executar testes em pipeline de CI/CD;
-- Comparar a mesma suíte com Playwright.
+- Implementar a mesma suíte utilizando Selenium WebDriver
