@@ -1,6 +1,6 @@
-# QA Automation Lab
+# QA Cypress Lab
 
-Projeto de portfólio criado para praticar, organizar e documentar testes automatizados end-to-end com Cypress.
+Projeto de portfólio criado para praticar e documentar testes automatizados end-to-end com Cypress.
 
 O objetivo deste projeto é demonstrar uma suíte de automação web cobrindo fluxos reais de uma aplicação de e-commerce de treino, com validações, evidências e execução completa via terminal.
 
