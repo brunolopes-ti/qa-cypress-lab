@@ -1,0 +1,7 @@
+**/node_modules/
+
+cypress/cypress/videos/
+cypress/cypress/screenshots/
+
+playwright/playwright-report/
+playwright/test-results/
