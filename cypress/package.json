@@ -1,0 +1,23 @@
+{
+  "name": "qa-automation-cypress",
+  "version": "1.0.0",
+  "description": "Projeto de automação de testes com Cypress para o SauceDemo.",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "keywords": [
+    "qa",
+    "cypress",
+    "automation",
+    "e2e",
+    "software-testing"
+  ],
+  "author": "Bruno Ramos Lopes",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  }
+}
