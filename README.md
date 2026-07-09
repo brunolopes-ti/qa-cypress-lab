@@ -35,7 +35,7 @@ A suíte automatizada cobre os seguintes fluxos:
 ## Estrutura do projeto
 
 ```text
-qa-automation-lab
+qa-cypress-lab
 ├── cypress
 │   ├── e2e
 │   │   ├── saucedemo-login.cy.js
@@ -43,7 +43,6 @@ qa-automation-lab
 │   │   └── saucedemo-checkout.cy.js
 │   ├── fixtures
 │   ├── support
-│   ├── screenshots
 │   ├── cypress.config.js
 │   ├── package.json
 │   └── package-lock.json
@@ -63,7 +62,6 @@ qa-automation-lab
 │           ├── checkout-completo-teste-passando.png
 │           ├── checkout-completo-saucedemo.png
 │           └── suite-completa-cypress-passando.png
-├── playwright
 ├── .gitignore
 └── README.md
 ```
@@ -378,6 +376,16 @@ module.exports = defineConfig({
 });
 ```
 
+## Boas práticas aplicadas
+
+- Separação dos testes por fluxo funcional;
+- Uso de seletores estáveis com `data-test`;
+- Validações de URL, textos, elementos visíveis e fluxo de navegação;
+- Geração de evidências automáticas com `cy.screenshot`;
+- Organização das evidências em pasta específica para documentação;
+- Execução da suíte completa via terminal;
+- Controle de arquivos temporários com `.gitignore`.
+
 ## Observações
 
 As evidências automáticas geradas pelo Cypress foram copiadas para a pasta:
@@ -397,7 +405,8 @@ Suíte automatizada Cypress criada, organizada, executada e documentada com suce
 ## Próximas melhorias possíveis
 
 - Criar comandos customizados para login;
-- Usar fixtures para massa de dados;
+- Utilizar fixtures para massa de dados;
 - Adicionar testes negativos no checkout;
 - Executar testes em pipeline de CI/CD;
-- Implementar a mesma suíte utilizando Selenium WebDriver
+- Implementar a mesma suíte utilizando Selenium WebDriver;
+- Criar um projeto complementar com Playwright.
