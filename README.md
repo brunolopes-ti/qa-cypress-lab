@@ -1,29 +1,45 @@
 # QA Cypress Lab
 
-Projeto de portfólio desenvolvido para praticar e documentar testes automatizados end-to-end com Cypress, incluindo automação tradicional e cenários escritos com BDD utilizando Gherkin e Cucumber.
+![Cypress](https://img.shields.io/badge/Cypress-E2E%20Testing-brightgreen)
+![JavaScript](https://img.shields.io/badge/JavaScript-Test%20Automation-yellow)
+![BDD](https://img.shields.io/badge/BDD-Behavior%20Driven%20Development-blueviolet)
+![Gherkin](https://img.shields.io/badge/Gherkin-Feature%20Files-green)
+![Cucumber](https://img.shields.io/badge/Cucumber-Test%20Framework-brightgreen)
+![Node.js](https://img.shields.io/badge/Node.js-Runtime-green)
 
-O objetivo do projeto é demonstrar uma suíte de automação web cobrindo fluxos críticos de uma aplicação de e-commerce de treino, com cenários positivos e negativos, validações funcionais, documentação, evidências e execução completa via terminal.
+Projeto de portfólio desenvolvido para praticar e documentar **testes automatizados end-to-end com Cypress e JavaScript**, combinando automação tradicional com cenários BDD utilizando **Gherkin e Cucumber**.
+
+O projeto demonstra uma suíte de automação Web cobrindo fluxos funcionais do SauceDemo, com cenários positivos e negativos, validações, evidências, execução via terminal e integração entre testes Cypress tradicionais e especificações executáveis em arquivos `.feature`.
+
+---
 
 ## Tecnologias utilizadas
 
-- Cypress
-- JavaScript
-- Node.js
-- npm
-- BDD
-- Gherkin
-- Cucumber
-- `@badeball/cypress-cucumber-preprocessor`
-- esbuild
-- SauceDemo
-- VS Code
-- Git e GitHub
+- Cypress;
+- JavaScript;
+- Node.js;
+- npm;
+- BDD;
+- Gherkin;
+- Cucumber;
+- `@badeball/cypress-cucumber-preprocessor`;
+- `@bahmutov/cypress-esbuild-preprocessor`;
+- esbuild;
+- SauceDemo;
+- Git;
+- GitHub;
+- Markdown;
+- Visual Studio Code.
+
+---
 
 ## Sistema utilizado para teste
 
 Aplicação: [SauceDemo](https://www.saucedemo.com/)
 
-O SauceDemo é uma aplicação web utilizada para estudos de Quality Assurance, permitindo validar fluxos como autenticação, catálogo de produtos, carrinho e checkout.
+O SauceDemo é uma aplicação Web utilizada para estudos e práticas de Quality Assurance, permitindo validar fluxos como autenticação, catálogo de produtos, carrinho e checkout.
+
+---
 
 ## Escopo da automação
 
@@ -37,12 +53,15 @@ A suíte cobre os seguintes fluxos:
 - Remoção de produto do carrinho;
 - Checkout completo;
 - Cenários descritos em BDD com Gherkin;
+- Step Definitions em JavaScript;
 - Execução de testes tradicionais Cypress e testes BDD;
 - Execução completa da suíte em modo headless.
 
+---
+
 ## Estratégia de automação
 
-O projeto possui duas abordagens de testes automatizados trabalhando em conjunto.
+O projeto utiliza duas abordagens de automação trabalhando em conjunto.
 
 ### Cypress tradicional
 
@@ -56,7 +75,7 @@ saucedemo-checkout.cy.js
 
 ### Cypress com BDD
 
-Cenários de negócio descritos em arquivos `.feature` utilizando Gherkin e implementados com Cucumber:
+Cenários de comportamento descritos em arquivos `.feature` utilizando Gherkin:
 
 ```text
 login.feature
@@ -64,7 +83,7 @@ cart.feature
 checkout.feature
 ```
 
-As definições dos passos são implementadas em:
+As respectivas Step Definitions são implementadas em JavaScript:
 
 ```text
 login.js
@@ -72,14 +91,16 @@ cart.js
 checkout.js
 ```
 
-Essa estrutura permite separar a descrição do comportamento esperado da implementação técnica dos testes.
+Essa organização permite separar a **descrição do comportamento esperado** da **implementação técnica dos passos automatizados**.
+
+---
 
 ## Estrutura do projeto
 
 ```text
-qa-cypress-lab
-├── cypress
-│   ├── e2e
+qa-cypress-lab/
+├── cypress/
+│   ├── e2e/
 │   │   ├── saucedemo-login.cy.js
 │   │   ├── saucedemo-cart.cy.js
 │   │   ├── saucedemo-checkout.cy.js
@@ -89,14 +110,14 @@ qa-cypress-lab
 │   │   ├── cart.js
 │   │   ├── checkout.feature
 │   │   └── checkout.js
-│   ├── fixtures
-│   ├── support
+│   ├── fixtures/
+│   ├── support/
 │   ├── cypress.config.js
 │   ├── package.json
 │   └── package-lock.json
-├── docs
-│   └── evidencias
-│       └── cypress
+├── docs/
+│   └── evidencias/
+│       └── cypress/
 │           ├── login-valido-teste-passando.png
 │           ├── login-valido-saucedemo.png
 │           ├── login-invalido-teste-passando.png
@@ -118,6 +139,8 @@ qa-cypress-lab
 ├── .gitignore
 └── README.md
 ```
+
+---
 
 ## Como executar o projeto
 
@@ -159,33 +182,47 @@ Esse comando executa os testes tradicionais `.cy.js` e os cenários BDD `.featur
 npx cypress run --spec "e2e/**/*.feature"
 ```
 
-### Executar um teste tradicional específico
+### Executar testes tradicionais específicos
+
+Login:
 
 ```bash
 npx cypress run --spec "e2e/saucedemo-login.cy.js"
 ```
 
+Carrinho:
+
 ```bash
 npx cypress run --spec "e2e/saucedemo-cart.cy.js"
 ```
+
+Checkout:
 
 ```bash
 npx cypress run --spec "e2e/saucedemo-checkout.cy.js"
 ```
 
-### Executar uma feature específica
+### Executar features específicas
+
+Login:
 
 ```bash
 npx cypress run --spec "e2e/login.feature"
 ```
 
+Carrinho:
+
 ```bash
 npx cypress run --spec "e2e/cart.feature"
 ```
 
+Checkout:
+
 ```bash
 npx cypress run --spec "e2e/checkout.feature"
 ```
+
+---
 
 # Testes tradicionais Cypress
 
@@ -229,9 +266,11 @@ Cenário:
 
 - Realizar checkout completo com sucesso.
 
+---
+
 # Cenários BDD
 
-Os cenários BDD foram escritos em português utilizando a estrutura:
+Os cenários BDD foram escritos em português utilizando Gherkin e a estrutura:
 
 ```gherkin
 Dado
@@ -239,6 +278,10 @@ Quando
 E
 Então
 ```
+
+Também foi utilizado `Contexto` quando havia pré-condições comuns entre cenários.
+
+---
 
 ## Feature: Login
 
@@ -264,13 +307,11 @@ Cenário: Login realizado com sucesso
   Então devo visualizar a página de produtos
 ```
 
-**Evidência:**
-
-```text
-docs/evidencias/cypress/bdd-login-3-cenarios.png
-```
+### Evidência
 
 ![BDD Login](docs/evidencias/cypress/bdd-login-3-cenarios.png)
+
+---
 
 ## Feature: Carrinho
 
@@ -287,13 +328,11 @@ Cenários:
 
 Foi utilizado `Contexto` para definir a pré-condição comum de autenticação.
 
-**Evidência:**
-
-```text
-docs/evidencias/cypress/bdd-carrinho-cenarios.png
-```
+### Evidência
 
 ![BDD Carrinho](docs/evidencias/cypress/bdd-carrinho-cenarios.png)
+
+---
 
 ## Feature: Checkout
 
@@ -309,21 +348,19 @@ Cenário:
 
 O fluxo automatizado contempla:
 
-- autenticação;
-- inclusão do produto no carrinho;
-- acesso ao checkout;
-- preenchimento dos dados obrigatórios;
-- revisão do pedido;
-- finalização da compra;
-- validação da confirmação do pedido.
+- Autenticação;
+- Inclusão do produto no carrinho;
+- Acesso ao checkout;
+- Preenchimento dos dados obrigatórios;
+- Revisão do pedido;
+- Finalização da compra;
+- Validação da confirmação do pedido.
 
-**Evidência:**
-
-```text
-docs/evidencias/cypress/bdd-checkout-cenario.png
-```
+### Evidência
 
 ![BDD Checkout](docs/evidencias/cypress/bdd-checkout-cenario.png)
+
+---
 
 # Cenários automatizados tradicionais
 
@@ -342,6 +379,8 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 - Exibição do título `Products`;
 - Exibição da lista de produtos.
 
+---
+
 ## CT-02 - Login inválido
 
 **Objetivo:** validar que o sistema exibe mensagem de erro ao tentar login com credenciais inválidas.
@@ -355,6 +394,8 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 
 - Exibição da mensagem de erro;
 - Permanência na tela de login.
+
+---
 
 ## CT-03 - Login com usuário bloqueado
 
@@ -370,6 +411,8 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 - Exibição da mensagem de usuário bloqueado;
 - Permanência na tela de login.
 
+---
+
 ## CT-04 - Adicionar produto ao carrinho
 
 **Objetivo:** validar que um produto pode ser adicionado ao carrinho.
@@ -384,6 +427,8 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 - Contador do carrinho com valor `1`;
 - Alteração do botão para `Remove`.
 
+---
+
 ## CT-05 - Validar produto no carrinho
 
 **Objetivo:** validar que o produto adicionado aparece corretamente no carrinho.
@@ -395,6 +440,8 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 - Exibição do produto `Sauce Labs Backpack`;
 - Exibição do preço `$29.99`;
 - Exibição do botão `Checkout`.
+
+---
 
 ## CT-06 - Checkout completo
 
@@ -416,9 +463,11 @@ docs/evidencias/cypress/bdd-checkout-cenario.png
 - Finalização da compra;
 - Exibição da mensagem `Thank you for your order!`.
 
+---
+
 # Resultado dos testes BDD
 
-Execução realizada com:
+Execução:
 
 ```bash
 npx cypress run --spec "e2e/**/*.feature"
@@ -432,25 +481,18 @@ checkout.feature    1 teste passando
 login.feature       3 testes passando
 
 Total: 6 testes passando
-```
-
-**Resultado:**
-
-```text
 All specs passed!
 ```
 
-**Evidência:**
-
-```text
-docs/evidencias/cypress/bdd-suite-completa.png
-```
+### Evidência
 
 ![Suíte BDD completa](docs/evidencias/cypress/bdd-suite-completa.png)
 
+---
+
 # Resultado da suíte completa
 
-Após a implementação do BDD, a suíte tradicional e os novos cenários foram executados em conjunto.
+Após a implementação do BDD, os testes Cypress tradicionais e os cenários BDD foram executados em conjunto.
 
 Comando:
 
@@ -471,7 +513,7 @@ login.feature               3 testes passando
 Total: 13 testes passando
 ```
 
-**Resultado final:**
+Resultado final:
 
 ```text
 All specs passed!
@@ -479,15 +521,13 @@ All specs passed!
 0 failing
 ```
 
-Essa execução demonstra que a implementação de BDD foi adicionada sem comprometer os testes Cypress existentes.
+Essa execução demonstra que a implementação de BDD foi integrada sem comprometer os testes Cypress já existentes.
 
-**Evidência principal:**
-
-```text
-docs/evidencias/cypress/suite-completa-cypress-bdd-13-testes.png
-```
+### Evidência principal
 
 ![Suíte completa Cypress e BDD](docs/evidencias/cypress/suite-completa-cypress-bdd-13-testes.png)
+
+---
 
 # Configuração do Cypress
 
@@ -497,7 +537,7 @@ Arquivo:
 cypress/cypress.config.js
 ```
 
-Configuração atual:
+Configuração utilizada:
 
 ```javascript
 const { defineConfig } = require('cypress');
@@ -541,16 +581,18 @@ module.exports = defineConfig({
 
 Essa configuração permite que os testes tradicionais `.cy.js` e os arquivos BDD `.feature` sejam executados no mesmo projeto.
 
+---
+
 # Boas práticas aplicadas
 
 - Separação dos testes por fluxo funcional;
 - Cenários BDD escritos em Gherkin;
 - Uso de `Dado`, `Quando`, `E` e `Então`;
-- Separação entre arquivos `.feature` e step definitions;
 - Utilização de `Contexto` para pré-condições compartilhadas;
+- Separação entre arquivos `.feature` e Step Definitions;
 - Uso de seletores estáveis com `data-test`;
 - Cenários positivos e negativos;
-- Validação de URL, textos, elementos e navegação;
+- Validações de URL, textos, elementos e navegação;
 - Validação de mensagens de erro;
 - Organização das evidências por tecnologia;
 - Execução individual e completa das suítes;
@@ -558,6 +600,36 @@ Essa configuração permite que os testes tradicionais `.cy.js` e os arquivos BD
 - Compatibilidade entre testes Cypress tradicionais e BDD;
 - Controle de arquivos temporários com `.gitignore`;
 - Versionamento com Git e GitHub.
+
+---
+
+# Competências demonstradas
+
+Este projeto demonstra conhecimentos práticos em:
+
+- Quality Assurance;
+- Automação de testes Web;
+- Testes end-to-end;
+- Cypress;
+- JavaScript;
+- Node.js;
+- BDD;
+- Gherkin;
+- Cucumber;
+- Feature Files;
+- Step Definitions;
+- Testes funcionais;
+- Testes regressivos;
+- Cenários positivos e negativos;
+- Seletores Web;
+- Assertions e validações;
+- Automação de login, carrinho e checkout;
+- Execução headless;
+- Git e GitHub;
+- Evidências de execução;
+- Documentação técnica.
+
+---
 
 # Evidências
 
@@ -579,6 +651,8 @@ suite-completa-cypress-bdd-13-testes.png
 
 A pasta automática de screenshots do Cypress permanece no `.gitignore`, evitando o versionamento desnecessário de arquivos temporários de execução.
 
+---
+
 # Status do projeto
 
 **Concluído nesta etapa.**
@@ -592,12 +666,14 @@ O projeto atualmente demonstra:
 - BDD;
 - Gherkin;
 - Cucumber;
+- Arquivos `.feature`;
 - Step Definitions;
-- Casos de teste;
-- Documentação de evidências;
 - Execução headless;
-- Suíte tradicional e BDD funcionando em conjunto;
-- 13 testes executados com sucesso.
+- Testes tradicionais e BDD funcionando em conjunto;
+- **13 testes executados com sucesso, incluindo 6 cenários BDD**;
+- Evidências e documentação técnica.
+
+---
 
 # Próximas melhorias possíveis
 
@@ -606,5 +682,15 @@ O projeto atualmente demonstra:
 - Adicionar cenários negativos no checkout;
 - Implementar Page Object Model;
 - Executar a suíte em pipeline de CI/CD;
-- Gerar relatórios automatizados de execução;
-- Avaliar uso de tags para execução seletiva de cenários BDD.
+- Gerar relatórios automatizados;
+- Utilizar tags para execução seletiva de cenários BDD;
+- Explorar interceptação de requisições com `cy.intercept()`.
+
+---
+
+# Autor
+
+**Bruno Ramos Lopes**
+
+LinkedIn: [linkedin.com/in/brunolopes-ti](https://linkedin.com/in/brunolopes-ti)  
+GitHub: [github.com/brunolopes-ti](https://github.com/brunolopes-ti)
