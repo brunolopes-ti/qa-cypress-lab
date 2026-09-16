@@ -21,30 +21,22 @@ describe('SauceDemo - Carrinho', () => {
 
     cy.screenshot('produto-adicionado-carrinho-saucedemo');
   });
-});
 
-describe('SauceDemo - Carrinho', () => {
-  beforeEach(() => {
-    cy.visit('https://www.saucedemo.com/');
-
-    cy.get('[data-test="username"]').type('standard_user');
-    cy.get('[data-test="password"]').type('secret_sauce');
-    cy.get('[data-test="login-button"]').click();
-
-    cy.url().should('include', '/inventory.html');
-  });
-
-  it('Deve adicionar um produto ao carrinho', () => {
+  it('Deve atualizar o contador ao adicionar dois produtos ao carrinho', () => {
     cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+    cy.get('[data-test="add-to-cart-sauce-labs-bike-light"]').click();
 
     cy.get('[data-test="shopping-cart-badge"]')
       .should('be.visible')
-      .and('contain', '1');
+      .and('contain', '2');
 
     cy.get('[data-test="remove-sauce-labs-backpack"]')
       .should('be.visible');
 
-    cy.screenshot('produto-adicionado-carrinho-saucedemo');
+    cy.get('[data-test="remove-sauce-labs-bike-light"]')
+      .should('be.visible');
+
+    cy.screenshot('contador-dois-produtos-carrinho-saucedemo');
   });
 
   it('Deve validar produto adicionado na página do carrinho', () => {
