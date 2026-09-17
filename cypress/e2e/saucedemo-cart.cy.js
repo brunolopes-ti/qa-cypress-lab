@@ -14,7 +14,7 @@ describe('SauceDemo - Carrinho', () => {
 
     cy.get('[data-test="shopping-cart-badge"]')
       .should('be.visible')
-      .and('contain', '1');
+      .and('have.text', '1');
 
     cy.get('[data-test="remove-sauce-labs-backpack"]')
       .should('be.visible');
@@ -28,7 +28,7 @@ describe('SauceDemo - Carrinho', () => {
 
     cy.get('[data-test="shopping-cart-badge"]')
       .should('be.visible')
-      .and('contain', '2');
+      .and('have.text', '2');
 
     cy.get('[data-test="remove-sauce-labs-backpack"]')
       .should('be.visible');
@@ -53,7 +53,7 @@ describe('SauceDemo - Carrinho', () => {
 
     cy.get('[data-test="inventory-item-price"]')
       .should('be.visible')
-      .and('contain', '$29.99');
+      .and('have.text', '$29.99');
 
     cy.get('[data-test="checkout"]').should('be.visible');
 
