@@ -4,68 +4,63 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-Test%20Automation-yellow)
 ![BDD](https://img.shields.io/badge/BDD-Behavior%20Driven%20Development-blueviolet)
 ![Gherkin](https://img.shields.io/badge/Gherkin-Feature%20Files-green)
-![Cucumber](https://img.shields.io/badge/Cucumber-Test%20Framework-brightgreen)
 ![Node.js](https://img.shields.io/badge/Node.js-Runtime-green)
 
-Projeto de portfólio desenvolvido para praticar e documentar **testes automatizados end-to-end com Cypress e JavaScript**, combinando automação tradicional com cenários BDD utilizando **Gherkin e Cucumber**.
+Projeto de portfólio desenvolvido para praticar e documentar **automação de testes Web end-to-end com Cypress e JavaScript**, combinando testes tradicionais com cenários BDD escritos em **Gherkin**.
 
-O projeto demonstra uma suíte de automação Web cobrindo fluxos funcionais do SauceDemo, com cenários positivos e negativos, validações, evidências, execução via terminal e integração entre testes Cypress tradicionais e especificações executáveis em arquivos `.feature`.
+A suíte automatiza fluxos funcionais do SauceDemo, incluindo autenticação, carrinho e checkout, com cenários positivos e negativos, assertions, evidências e execução em modo headless pelo terminal.
 
 ---
 
-## Tecnologias utilizadas
+## Stack e práticas utilizadas
 
 - Cypress;
 - JavaScript;
 - Node.js;
-- npm;
 - BDD;
 - Gherkin;
 - Cucumber;
-- `@badeball/cypress-cucumber-preprocessor`;
-- `@bahmutov/cypress-esbuild-preprocessor`;
-- esbuild;
-- SauceDemo;
 - Git;
-- GitHub;
-- Markdown;
-- Visual Studio Code.
+- GitHub.
+
+A integração dos arquivos `.feature` com o Cypress é realizada por meio do pacote `@badeball/cypress-cucumber-preprocessor`.
 
 ---
 
 ## Sistema utilizado para teste
 
-Aplicação: [SauceDemo](https://www.saucedemo.com/)
+**Aplicação:** [SauceDemo](https://www.saucedemo.com/)
 
-O SauceDemo é uma aplicação Web utilizada para estudos e práticas de Quality Assurance, permitindo validar fluxos como autenticação, catálogo de produtos, carrinho e checkout.
+O SauceDemo é uma aplicação Web utilizada para estudos e práticas de Quality Assurance, permitindo testar fluxos como autenticação, catálogo de produtos, carrinho e checkout.
 
 ---
 
 ## Escopo da automação
 
-A suíte cobre os seguintes fluxos:
+A suíte cobre:
 
 - Login com usuário válido;
 - Login com credenciais inválidas;
 - Login com usuário bloqueado;
 - Adição de produto ao carrinho;
+- Atualização do contador com múltiplos produtos;
 - Validação de produto no carrinho;
 - Remoção de produto do carrinho;
 - Checkout completo;
-- Cenários descritos em BDD com Gherkin;
+- Cenários BDD escritos em Gherkin;
 - Step Definitions em JavaScript;
-- Execução de testes tradicionais Cypress e testes BDD;
+- Execução de testes Cypress tradicionais e BDD;
 - Execução completa da suíte em modo headless.
 
 ---
 
 ## Estratégia de automação
 
-O projeto utiliza duas abordagens de automação trabalhando em conjunto.
+O projeto utiliza duas abordagens no mesmo conjunto de testes.
 
 ### Cypress tradicional
 
-Testes escritos diretamente em JavaScript utilizando a estrutura padrão do Cypress:
+Testes escritos diretamente em JavaScript:
 
 ```text
 saucedemo-login.cy.js
@@ -73,9 +68,11 @@ saucedemo-cart.cy.js
 saucedemo-checkout.cy.js
 ```
 
+São **7 testes automatizados tradicionais**, distribuídos entre login, carrinho e checkout.
+
 ### Cypress com BDD
 
-Cenários de comportamento descritos em arquivos `.feature` utilizando Gherkin:
+Os comportamentos são descritos em arquivos `.feature` utilizando Gherkin:
 
 ```text
 login.feature
@@ -91,11 +88,13 @@ cart.js
 checkout.js
 ```
 
-Essa organização permite separar a **descrição do comportamento esperado** da **implementação técnica dos passos automatizados**.
+São **6 cenários BDD**.
+
+Essa abordagem separa a descrição do comportamento esperado da implementação técnica dos passos automatizados.
 
 ---
 
-## Estrutura do projeto
+## Estrutura principal do projeto
 
 ```text
 qa-cypress-lab/
@@ -110,32 +109,12 @@ qa-cypress-lab/
 │   │   ├── cart.js
 │   │   ├── checkout.feature
 │   │   └── checkout.js
-│   ├── fixtures/
-│   ├── support/
 │   ├── cypress.config.js
 │   ├── package.json
 │   └── package-lock.json
 ├── docs/
 │   └── evidencias/
 │       └── cypress/
-│           ├── login-valido-teste-passando.png
-│           ├── login-valido-saucedemo.png
-│           ├── login-invalido-teste-passando.png
-│           ├── login-invalido-saucedemo.png
-│           ├── login-usuario-bloqueado-teste-passando.png
-│           ├── login-usuario-bloqueado-saucedemo.png
-│           ├── produto-adicionado-carrinho-teste-passando.png
-│           ├── produto-adicionado-carrinho-saucedemo.png
-│           ├── validacao-carrinho-teste-passando.png
-│           ├── validacao-carrinho-saucedemo.png
-│           ├── checkout-completo-teste-passando.png
-│           ├── checkout-completo-saucedemo.png
-│           ├── suite-completa-cypress-passando.png
-│           ├── bdd-login-3-cenarios.png
-│           ├── bdd-carrinho-cenarios.png
-│           ├── bdd-checkout-cenario.png
-│           ├── bdd-suite-completa.png
-│           └── suite-completa-cypress-bdd-13-testes.png
 ├── .gitignore
 └── README.md
 ```
@@ -176,50 +155,28 @@ npx cypress run
 
 Esse comando executa os testes tradicionais `.cy.js` e os cenários BDD `.feature`.
 
-### Executar somente os testes BDD
+### Executar somente os cenários BDD
 
 ```bash
 npx cypress run --spec "e2e/**/*.feature"
 ```
 
-### Executar testes tradicionais específicos
-
-Login:
+### Executar somente os testes tradicionais de login
 
 ```bash
 npx cypress run --spec "e2e/saucedemo-login.cy.js"
 ```
 
-Carrinho:
+### Executar somente os testes tradicionais de carrinho
 
 ```bash
 npx cypress run --spec "e2e/saucedemo-cart.cy.js"
 ```
 
-Checkout:
+### Executar somente o teste tradicional de checkout
 
 ```bash
 npx cypress run --spec "e2e/saucedemo-checkout.cy.js"
-```
-
-### Executar features específicas
-
-Login:
-
-```bash
-npx cypress run --spec "e2e/login.feature"
-```
-
-Carrinho:
-
-```bash
-npx cypress run --spec "e2e/cart.feature"
-```
-
-Checkout:
-
-```bash
-npx cypress run --spec "e2e/checkout.feature"
 ```
 
 ---
@@ -236,9 +193,11 @@ cypress/e2e/saucedemo-login.cy.js
 
 Cenários:
 
-- Login válido;
-- Login inválido;
-- Login com usuário bloqueado.
+1. Login válido;
+2. Login com credenciais inválidas;
+3. Login com usuário bloqueado.
+
+---
 
 ## Carrinho
 
@@ -250,9 +209,11 @@ cypress/e2e/saucedemo-cart.cy.js
 
 Cenários:
 
-- Adicionar produto ao carrinho;
-- Validar contador do carrinho;
-- Validar produto, preço e botão de checkout.
+1. Adicionar um produto ao carrinho;
+2. Adicionar dois produtos e validar o contador;
+3. Validar produto, preço e botão de checkout na página do carrinho.
+
+---
 
 ## Checkout
 
@@ -264,22 +225,142 @@ cypress/e2e/saucedemo-checkout.cy.js
 
 Cenário:
 
-- Realizar checkout completo com sucesso.
+1. Realizar checkout completo com sucesso.
+
+---
+
+# Cenários automatizados tradicionais
+
+## CT-01 - Login válido
+
+**Objetivo:** validar que um usuário com credenciais corretas consegue acessar a página de produtos.
+
+**Dados utilizados:**
+
+| Campo | Valor |
+|---|---|
+| Usuário | `standard_user` |
+| Senha | `secret_sauce` |
+
+**Validações:**
+
+- Redirecionamento para `/inventory.html`;
+- Exibição do título `Products`;
+- Exibição da lista de produtos.
+
+---
+
+## CT-02 - Login inválido
+
+**Objetivo:** validar que o sistema rejeita credenciais inválidas.
+
+**Dados utilizados:**
+
+| Campo | Valor |
+|---|---|
+| Usuário | `usuario_invalido` |
+| Senha | `senha_invalida` |
+
+**Validações:**
+
+- Exibição da mensagem de erro;
+- Permanência na página de login.
+
+---
+
+## CT-03 - Login com usuário bloqueado
+
+**Objetivo:** validar que um usuário bloqueado não consegue acessar o sistema.
+
+**Dados utilizados:**
+
+| Campo | Valor |
+|---|---|
+| Usuário | `locked_out_user` |
+| Senha | `secret_sauce` |
+
+**Validações:**
+
+- Exibição da mensagem informando que o usuário está bloqueado;
+- Permanência na página de login.
+
+---
+
+## CT-04 - Adicionar produto ao carrinho
+
+**Objetivo:** validar que um produto pode ser adicionado ao carrinho.
+
+**Produto utilizado:**
+
+`Sauce Labs Backpack`
+
+**Validações:**
+
+- Adição do produto;
+- Contador do carrinho com valor `1`;
+- Exibição do botão `Remove`.
+
+---
+
+## CT-05 - Atualizar contador com dois produtos
+
+**Objetivo:** validar que o contador do carrinho é atualizado corretamente após a inclusão de dois produtos.
+
+**Produtos utilizados:**
+
+- `Sauce Labs Backpack`;
+- `Sauce Labs Bike Light`.
+
+**Validações:**
+
+- Adição dos dois produtos;
+- Contador do carrinho com valor `2`;
+- Exibição do botão `Remove` para os dois produtos.
+
+---
+
+## CT-06 - Validar produto na página do carrinho
+
+**Objetivo:** validar que o produto adicionado é apresentado corretamente no carrinho.
+
+**Validações:**
+
+- Redirecionamento para `/cart.html`;
+- Exibição do título `Your Cart`;
+- Exibição do produto `Sauce Labs Backpack`;
+- Exibição do preço `$29.99`;
+- Exibição do botão `Checkout`.
+
+---
+
+## CT-07 - Checkout completo
+
+**Objetivo:** validar o fluxo completo de compra até a confirmação do pedido.
+
+**Dados utilizados:**
+
+| Campo | Valor |
+|---|---|
+| Nome | `Bruno` |
+| Sobrenome | `Ramos` |
+| CEP | `72000-000` |
+
+**Validações:**
+
+- Acesso à etapa de informações do checkout;
+- Preenchimento dos dados obrigatórios;
+- Acesso ao resumo da compra;
+- Validação do produto;
+- Validação do preço;
+- Validação do subtotal;
+- Finalização da compra;
+- Exibição da mensagem `Thank you for your order!`.
 
 ---
 
 # Cenários BDD
 
-Os cenários BDD foram escritos em português utilizando Gherkin e a estrutura:
-
-```gherkin
-Dado
-Quando
-E
-Então
-```
-
-Também foi utilizado `Contexto` quando havia pré-condições comuns entre cenários.
+Os cenários BDD foram escritos em português utilizando Gherkin.
 
 ---
 
@@ -307,10 +388,6 @@ Cenário: Login realizado com sucesso
   Então devo visualizar a página de produtos
 ```
 
-### Evidência
-
-![BDD Login](docs/evidencias/cypress/bdd-login-3-cenarios.png)
-
 ---
 
 ## Feature: Carrinho
@@ -326,11 +403,7 @@ Cenários:
 1. Adicionar produto ao carrinho;
 2. Remover produto do carrinho.
 
-Foi utilizado `Contexto` para definir a pré-condição comum de autenticação.
-
-### Evidência
-
-![BDD Carrinho](docs/evidencias/cypress/bdd-carrinho-cenarios.png)
+A feature utiliza `Contexto` para definir a autenticação como pré-condição comum dos cenários.
 
 ---
 
@@ -346,134 +419,28 @@ Cenário:
 
 1. Finalizar compra com sucesso.
 
-O fluxo automatizado contempla:
+O fluxo contempla:
 
 - Autenticação;
-- Inclusão do produto no carrinho;
-- Acesso ao checkout;
+- Inclusão de produto no carrinho;
+- Acesso ao carrinho;
+- Início do checkout;
 - Preenchimento dos dados obrigatórios;
-- Revisão do pedido;
+- Acesso à revisão do pedido;
 - Finalização da compra;
 - Validação da confirmação do pedido.
-
-### Evidência
-
-![BDD Checkout](docs/evidencias/cypress/bdd-checkout-cenario.png)
-
----
-
-# Cenários automatizados tradicionais
-
-## CT-01 - Login válido
-
-**Objetivo:** validar que um usuário com credenciais corretas consegue acessar a página de produtos.
-
-| Campo | Valor |
-|---|---|
-| Usuário | `standard_user` |
-| Senha | `secret_sauce` |
-
-**Validações:**
-
-- Redirecionamento para `/inventory.html`;
-- Exibição do título `Products`;
-- Exibição da lista de produtos.
-
----
-
-## CT-02 - Login inválido
-
-**Objetivo:** validar que o sistema exibe mensagem de erro ao tentar login com credenciais inválidas.
-
-| Campo | Valor |
-|---|---|
-| Usuário | `usuario_invalido` |
-| Senha | `senha_invalida` |
-
-**Validações:**
-
-- Exibição da mensagem de erro;
-- Permanência na tela de login.
-
----
-
-## CT-03 - Login com usuário bloqueado
-
-**Objetivo:** validar que um usuário bloqueado não consegue acessar o sistema.
-
-| Campo | Valor |
-|---|---|
-| Usuário | `locked_out_user` |
-| Senha | `secret_sauce` |
-
-**Validações:**
-
-- Exibição da mensagem de usuário bloqueado;
-- Permanência na tela de login.
-
----
-
-## CT-04 - Adicionar produto ao carrinho
-
-**Objetivo:** validar que um produto pode ser adicionado ao carrinho.
-
-| Produto | Valor |
-|---|---|
-| Sauce Labs Backpack | `$29.99` |
-
-**Validações:**
-
-- Clique em `Add to cart`;
-- Contador do carrinho com valor `1`;
-- Alteração do botão para `Remove`.
-
----
-
-## CT-05 - Validar produto no carrinho
-
-**Objetivo:** validar que o produto adicionado aparece corretamente no carrinho.
-
-**Validações:**
-
-- Redirecionamento para `/cart.html`;
-- Exibição do título `Your Cart`;
-- Exibição do produto `Sauce Labs Backpack`;
-- Exibição do preço `$29.99`;
-- Exibição do botão `Checkout`.
-
----
-
-## CT-06 - Checkout completo
-
-**Objetivo:** validar o fluxo completo de compra.
-
-| Campo | Valor |
-|---|---|
-| Nome | `Bruno` |
-| Sobrenome | `Ramos` |
-| CEP | `72000-000` |
-
-**Validações:**
-
-- Acesso ao checkout;
-- Preenchimento dos dados;
-- Acesso ao resumo da compra;
-- Validação do produto;
-- Validação do preço;
-- Finalização da compra;
-- Exibição da mensagem `Thank you for your order!`.
 
 ---
 
 # Resultado dos testes BDD
 
-Execução:
+Comando:
 
 ```bash
 npx cypress run --spec "e2e/**/*.feature"
 ```
 
-Resultado:
+Resultado documentado:
 
 ```text
 cart.feature        2 testes passando
@@ -492,7 +459,7 @@ All specs passed!
 
 # Resultado da suíte completa
 
-Após a implementação do BDD, os testes Cypress tradicionais e os cenários BDD foram executados em conjunto.
+Os testes Cypress tradicionais e os cenários BDD foram executados em conjunto.
 
 Comando:
 
@@ -500,7 +467,7 @@ Comando:
 npx cypress run
 ```
 
-Resultado:
+Resultado documentado:
 
 ```text
 saucedemo-cart.cy.js        3 testes passando
@@ -521,8 +488,6 @@ All specs passed!
 0 failing
 ```
 
-Essa execução demonstra que a implementação de BDD foi integrada sem comprometer os testes Cypress já existentes.
-
 ### Evidência principal
 
 ![Suíte completa Cypress e BDD](docs/evidencias/cypress/suite-completa-cypress-bdd-13-testes.png)
@@ -531,13 +496,13 @@ Essa execução demonstra que a implementação de BDD foi integrada sem comprom
 
 # Configuração do Cypress
 
-Arquivo:
+O arquivo:
 
 ```text
 cypress/cypress.config.js
 ```
 
-Configuração utilizada:
+configura o projeto para reconhecer tanto os testes tradicionais `.cy.js` quanto os arquivos `.feature`.
 
 ```javascript
 const { defineConfig } = require('cypress');
@@ -579,112 +544,84 @@ module.exports = defineConfig({
 });
 ```
 
-Essa configuração permite que os testes tradicionais `.cy.js` e os arquivos BDD `.feature` sejam executados no mesmo projeto.
+Para o processamento dos arquivos `.feature`, o projeto utiliza:
+
+- `@badeball/cypress-cucumber-preprocessor`;
+- `@bahmutov/cypress-esbuild-preprocessor`;
+- `esbuild`.
+
+Essas dependências fazem parte da configuração técnica do BDD e não são apresentadas como tecnologias principais do projeto.
 
 ---
 
 # Boas práticas aplicadas
 
-- Separação dos testes por fluxo funcional;
-- Cenários BDD escritos em Gherkin;
-- Uso de `Dado`, `Quando`, `E` e `Então`;
-- Utilização de `Contexto` para pré-condições compartilhadas;
-- Separação entre arquivos `.feature` e Step Definitions;
+- Organização dos testes por fluxo funcional;
 - Uso de seletores estáveis com `data-test`;
 - Cenários positivos e negativos;
-- Validações de URL, textos, elementos e navegação;
-- Validação de mensagens de erro;
-- Organização das evidências por tecnologia;
-- Execução individual e completa das suítes;
-- Execução headless via terminal;
-- Compatibilidade entre testes Cypress tradicionais e BDD;
-- Controle de arquivos temporários com `.gitignore`;
+- Assertions de URL, textos, elementos e estados da interface;
+- Separação entre arquivos `.feature` e Step Definitions;
+- Cenários BDD escritos em Gherkin;
+- Uso de `Contexto` para pré-condições compartilhadas;
+- Execução individual de arquivos de teste;
+- Execução completa da suíte em modo headless;
+- Evidências de execução;
 - Versionamento com Git e GitHub.
 
 ---
 
 # Competências demonstradas
 
-Este projeto demonstra conhecimentos práticos em:
+O projeto demonstra experiência prática com:
 
-- Quality Assurance;
 - Automação de testes Web;
 - Testes end-to-end;
+- Testes funcionais automatizados;
 - Cypress;
 - JavaScript;
 - Node.js;
 - BDD;
 - Gherkin;
-- Cucumber;
-- Feature Files;
 - Step Definitions;
-- Testes funcionais;
-- Testes regressivos;
 - Cenários positivos e negativos;
 - Seletores Web;
-- Assertions e validações;
+- Assertions;
 - Automação de login, carrinho e checkout;
 - Execução headless;
 - Git e GitHub;
-- Evidências de execução;
-- Documentação técnica.
+- Documentação técnica;
+- Evidências de execução.
 
 ---
 
 # Evidências
 
-As evidências utilizadas na documentação estão organizadas em:
+As evidências do projeto estão organizadas em:
 
 ```text
 docs/evidencias/cypress
 ```
 
-Entre as principais evidências da implementação BDD estão:
-
-```text
-bdd-login-3-cenarios.png
-bdd-carrinho-cenarios.png
-bdd-checkout-cenario.png
-bdd-suite-completa.png
-suite-completa-cypress-bdd-13-testes.png
-```
-
-A pasta automática de screenshots do Cypress permanece no `.gitignore`, evitando o versionamento desnecessário de arquivos temporários de execução.
+A pasta automática de screenshots gerada durante a execução do Cypress é ignorada pelo Git, evitando o versionamento de arquivos temporários.
 
 ---
 
 # Status do projeto
 
-**Concluído nesta etapa.**
+**Concluído.**
 
-O projeto atualmente demonstra:
+O projeto demonstra uma suíte funcional de automação Web com Cypress contendo:
 
-- Automação E2E com Cypress;
-- JavaScript aplicado à automação;
-- Testes funcionais e regressivos;
+- 7 testes tradicionais;
+- 6 cenários BDD;
+- 13 testes na execução completa documentada;
 - Cenários positivos e negativos;
-- BDD;
-- Gherkin;
-- Cucumber;
-- Arquivos `.feature`;
-- Step Definitions;
+- Automação de login, carrinho e checkout;
+- BDD com Gherkin;
+- Step Definitions em JavaScript;
 - Execução headless;
-- Testes tradicionais e BDD funcionando em conjunto;
-- **13 testes executados com sucesso, incluindo 6 cenários BDD**;
-- Evidências e documentação técnica.
-
----
-
-# Próximas melhorias possíveis
-
-- Criar comandos customizados para reduzir duplicação;
-- Utilizar fixtures para massa de dados;
-- Adicionar cenários negativos no checkout;
-- Implementar Page Object Model;
-- Executar a suíte em pipeline de CI/CD;
-- Gerar relatórios automatizados;
-- Utilizar tags para execução seletiva de cenários BDD;
-- Explorar interceptação de requisições com `cy.intercept()`.
+- Evidências de execução;
+- Documentação técnica.
 
 ---
 
